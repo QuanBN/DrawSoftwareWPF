@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Ellipse 1.png" />
+    <None Remove="icons8-cursor-80.png" />
+    <None Remove="icons8-hand-cursor-100.png" />
+    <None Remove="Line 1.png" />
+    <None Remove="Rectangle 1.png" />
+    <None Remove="Triangle 1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Ellipse 1.png" />
+    <Resource Include="icons8-cursor-80.png" />
+    <Resource Include="icons8-hand-cursor-100.png" />
+    <Resource Include="Line 1.png" />
+    <Resource Include="Rectangle 1.png" />
+    <Resource Include="Triangle 1.png" />
+  </ItemGroup>
+
+</Project>
