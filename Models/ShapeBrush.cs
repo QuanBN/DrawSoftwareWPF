@@ -9,11 +9,71 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DrawSoftware.ConfigArea;
+using DrawSoftware.Models.ShapeModels;
 
 namespace DrawSoftware.Models
 {
     public class ShapeBrush
     {
+        public TriangleShape? triangleShape = new TriangleShape();
+        public CircleShape? circleShape = new CircleShape();
+        public RetangleShape? retangleShape = new RetangleShape();
+        public LineShape? lineShape = new LineShape();
+        public Shape? shape;
+        public int shapeType { get; set; }
+        public ShapeBrush(int shapeType)
+        {
+            this.shapeType = shapeType;
+        }
+        public void Create(Point currentPoint, Point MousePoint)
+        {
+            switch (shapeType)
+            {
+                case 0:
+                    lineShape.Draw(currentPoint, MousePoint);
+                    shape = lineShape.shape;
+                    break;
+                case 1:
+                    circleShape.Draw(currentPoint, MousePoint);
+                    shape = circleShape.shape;
+                    break;
+                    
+                case 2:
+                    retangleShape.Draw(currentPoint, MousePoint);
+                    shape = retangleShape.shape;
+                    break;
+                case 3:
+                    triangleShape.Draw(currentPoint, MousePoint);
+                    shape = triangleShape.shape;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void Move(Point currentPoint, Point MousePoint)
+        {
+            switch (shapeType)
+            {
+                case 0:
+                    lineShape.Move(currentPoint, MousePoint);
+                    shape = lineShape.shape;
+                    break;
+                case 1:
+                    circleShape.Move(currentPoint, MousePoint);
+                    shape = circleShape.shape;
+                    break;
+                case 2:
+                    retangleShape.Move(currentPoint, MousePoint);
+                    shape = retangleShape.shape;
+                    break;
+                case 3:
+                    triangleShape.Move(currentPoint, MousePoint);
+                    shape = triangleShape.shape;
+                    break;
+                default:
+                    break;
+            }
+        }
         public Polygon Triangle(Point currentPoint, Point MousePoint)
         {
             

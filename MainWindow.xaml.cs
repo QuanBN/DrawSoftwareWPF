@@ -22,7 +22,7 @@ namespace DrawSoftware
     /// </summary>
     public partial class MainWindow : Window
     {
-        ShapeBrush shapeBrush = new ShapeBrush();
+        ShapeBrush shapeBrush = new ShapeBrush(0);
         Point currentPoint = new Point();
         Object currObj = null;
         bool isHold = false;
@@ -78,7 +78,7 @@ namespace DrawSoftware
                 line.X2 = e.GetPosition(this).X;
                 line.Y2 = e.GetPosition(this).Y - stPanel.ActualHeight - Menu.ActualHeight;
                 currentPoint = new Point(e.GetPosition(this).X, e.GetPosition(this).Y - stPanel.ActualHeight - Menu.ActualHeight);
-                paintSurface.Children.Add(line as Shape);
+                paintSurface.Children.Add(line);
             }
         }
         private void Shapes_MouseMove(object sender, MouseEventArgs e)
@@ -88,27 +88,25 @@ namespace DrawSoftware
             Shape el = null;
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                
+                shapeBrush.shapeType = lbShapes.SelectedIndex;
+                shapeBrush.Create(currentPoint, new Point(e.GetPosition(this).X, e.GetPosition(this).Y - stPanel.ActualHeight - Menu.ActualHeight));
+                el = shapeBrush.shape;
                 switch (lbShapes.SelectedIndex)
                 {
                     case 1:
-                        el = shapeBrush.Circle(currentPoint, new Point(e.GetPosition(this).X, e.GetPosition(this).Y - stPanel.ActualHeight - Menu.ActualHeight));
-                        Canvas.SetLeft(el, currentPoint.X-(el.Width/2));
-                        Canvas.SetTop(el, currentPoint.Y- (el.Height / 2));
                         el.Name = "Circle_" + ContainerPaint.Shapes.Count.ToString();
                         el.Name = "Circle";
                         break;
                     case 2:
-                        el = shapeBrush.Rectangle(currentPoint, new Point(e.GetPosition(this).X, e.GetPosition(this).Y - stPanel.ActualHeight - Menu.ActualHeight)) as Shape;
                         el.Name = "Retangle_" + ContainerPaint.Shapes.Count.ToString();
                         el.Name = "Retangle";
                         break;
                     case 3:
-                        el = shapeBrush.Triangle(currentPoint, new Point(e.GetPosition(this).X, e.GetPosition(this).Y - stPanel.ActualHeight - Menu.ActualHeight)) as Shape;
                         el.Name = "Triangle_" + ContainerPaint.Shapes.Count.ToString();
                         el.Name = "Triangle";
                         break;
                     default:
+                        el = null;
                         btnDraw_OnClick();
                         break;
                 }
