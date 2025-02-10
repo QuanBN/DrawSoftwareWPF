@@ -229,6 +229,13 @@ namespace DrawSoftware
             else
             {
                 ContainerPaint.IsDrag = false;
+                isHold = false;
+                foreach (UIElement el in paintSurface.Children)
+                {
+                    el.MouseLeftButtonDown -= Cursor_MouseDown;
+                    el.MouseLeftButtonUp -= Cursor_MouseUp;
+                    el.MouseMove -= Cursor_MouseMove;
+                }
                 paintSurface.MouseMove += Shapes_MouseMove;
             }
         }

@@ -20,6 +20,8 @@ namespace DrawSoftware.Models.ShapeModels
         {
             Polygon triangle = new Polygon();
             triangle.Fill = Config.brush.ColorPrimary;
+            triangle.Stroke = Config.brush.ColorSecondary;
+            triangle.StrokeThickness = Config.brush.Thickness;
             PointCollection points = new PointCollection();
             Point G = new Point(currentPoint.X, currentPoint.Y);
             double scaleFactor = Math.Sqrt(

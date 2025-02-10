@@ -22,9 +22,10 @@ namespace DrawSoftware.Models
 
         public Shape lastShape { get; set; }
         public int shapeType { get; set; }
-        public ShapeBrush(int shapeType)
+        public ShapeBrush(int shapeType, Shape? shape = null)
         {
             this.shapeType = shapeType;
+            this.lastShape = shape;
         }
         public void Create(Point currentPoint, Point MousePoint)
         {
@@ -66,13 +67,14 @@ namespace DrawSoftware.Models
                     lastShape = circleShape.shape;
                     break;
                 case 2:
-                    retangleShape.shape = lastShape;  
+                    retangleShape.shape = lastShape;
                     retangleShape.Move(currentPoint, MousePoint);
                     lastShape = retangleShape.shape;
                     break;
                 case 3:
                     triangleShape.shape = lastShape;
                     triangleShape.Move(currentPoint, MousePoint);
+                    lastShape = triangleShape.shape;
                     break;
                 default:
                     break;
