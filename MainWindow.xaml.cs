@@ -90,19 +90,19 @@ namespace DrawSoftware
             {
                 shapeBrush.shapeType = lbShapes.SelectedIndex;
                 shapeBrush.Create(currentPoint, new Point(e.GetPosition(this).X, e.GetPosition(this).Y - stPanel.ActualHeight - Menu.ActualHeight));
-                el = shapeBrush.shape;
+                el = shapeBrush.lastShape;
                 switch (lbShapes.SelectedIndex)
                 {
                     case 1:
-                        el.Name = "Circle_" + ContainerPaint.Shapes.Count.ToString();
+                        //el.Name = "Circle_" + ContainerPaint.Shapes.Count.ToString();
                         el.Name = "Circle";
                         break;
                     case 2:
-                        el.Name = "Retangle_" + ContainerPaint.Shapes.Count.ToString();
+                        //el.Name = "Retangle_" + ContainerPaint.Shapes.Count.ToString();
                         el.Name = "Retangle";
                         break;
                     case 3:
-                        el.Name = "Triangle_" + ContainerPaint.Shapes.Count.ToString();
+                        //el.Name = "Triangle_" + ContainerPaint.Shapes.Count.ToString();
                         el.Name = "Triangle";
                         break;
                     default:
@@ -155,7 +155,6 @@ namespace DrawSoftware
                 el.MouseMove += Cursor_MouseMove;
             }
         }
-        Polygon polygon = null;
         private void Cursor_MouseMove(object sender, MouseEventArgs e)
         {
             var obj = ContainerPaint.SelectedShape;
@@ -168,34 +167,19 @@ namespace DrawSoftware
                     {
                         if (obj.Name == "Circle")
                         {
-                            Canvas.SetLeft(obj, position.X - obj.ActualWidth / 2);
-                            Canvas.SetTop(obj, position.Y - obj.ActualHeight / 2);
+                            shapeBrush.shapeType = 1;
                         }
                         else if (obj.Name == "Retangle")
                         {
-                            Polygon rectangle = obj as Polygon;
-                            /*Point G = new Point(
-                                (rectangle.Points[0].X + rectangle.Points[1].X + rectangle.Points[2].X+ rectangle.Points[3].X) / 4, 
-                                (rectangle.Points[0].Y + rectangle.Points[1].Y + rectangle.Points[2].Y+ rectangle.Points[3].Y) / 4
-                                );*/
-                            Point V = new Point(position.X - currentPoint.X, position.Y - currentPoint.Y);
-                            rectangle.Points[0] = new Point(rectangle.Points[0].X + V.X, rectangle.Points[0].Y + V.Y);
-                            rectangle.Points[1] = new Point(rectangle.Points[1].X + V.X, rectangle.Points[1].Y + V.Y);
-                            rectangle.Points[2] = new Point(rectangle.Points[2].X + V.X, rectangle.Points[2].Y + V.Y);
-                            rectangle.Points[3] = new Point(rectangle.Points[3].X + V.X, rectangle.Points[3].Y + V.Y);
-                            currentPoint = position;
-
+                            shapeBrush.shapeType = 2;
                         }
                         else if (obj.Name == "Triangle")
                         {
-                            Polygon triangle = obj as Polygon;
-                            //Point G = new Point((triangle.Points[0].X + triangle.Points[1].X + triangle.Points[2].X)/3, (triangle.Points[0].Y + triangle.Points[1].Y + triangle.Points[2].Y) / 3);
-                            Point V = new Point(position.X - currentPoint.X, position.Y - currentPoint.Y);
-                            triangle.Points[0] = new Point(triangle.Points[0].X + V.X, triangle.Points[0].Y + V.Y);
-                            triangle.Points[1] = new Point(triangle.Points[1].X + V.X, triangle.Points[1].Y + V.Y);
-                            triangle.Points[2] = new Point(triangle.Points[2].X + V.X, triangle.Points[2].Y + V.Y);
-                            currentPoint = position;
+                            shapeBrush.shapeType = 3;
                         }
+                        shapeBrush.lastShape = obj as Shape;
+                        shapeBrush.Move(currentPoint, position);
+                        currentPoint = position;
                     }
                 }
             }
@@ -219,7 +203,7 @@ namespace DrawSoftware
             shap = obj as Shape;
             ContainerPaint.SelectedShape = shap;
             shap.Opacity = 0.7;
-            if (shap != null)
+            if(obj != null)
             {
                 ContainerPaint.IsDrag = true;
                 isHold = true;
@@ -230,6 +214,7 @@ namespace DrawSoftware
                 isHold = false;
             }
             
+
         }
 
         private void lbShapes_SelectionChanged(object sender, SelectionChangedEventArgs e)

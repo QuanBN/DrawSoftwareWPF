@@ -39,7 +39,6 @@ namespace DrawSoftware.Models.ShapeModels
         public override void Move(Point currentPoint, Point MousePoint)
         {
             Polygon triangle = shape as Polygon;
-            //Point G = new Point((triangle.Points[0].X + triangle.Points[1].X + triangle.Points[2].X)/3, (triangle.Points[0].Y + triangle.Points[1].Y + triangle.Points[2].Y) / 3);
             Point V = new Point(MousePoint.X - currentPoint.X, MousePoint.Y - currentPoint.Y);
             triangle.Points[0] = new Point(triangle.Points[0].X + V.X, triangle.Points[0].Y + V.Y);
             triangle.Points[1] = new Point(triangle.Points[1].X + V.X, triangle.Points[1].Y + V.Y);
