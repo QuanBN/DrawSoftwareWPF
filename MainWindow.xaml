@@ -76,7 +76,7 @@
                           VerticalScrollBarVisibility="Auto" 
                           HorizontalAlignment="Stretch" 
                           VerticalAlignment="Top">
-                <Grid Name="myGrid" HorizontalAlignment="Stretch" Height="10000" >
+                <Grid Name="myGrid" HorizontalAlignment="Stretch" Height="3000" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>

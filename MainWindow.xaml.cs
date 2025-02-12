@@ -122,7 +122,7 @@ namespace DrawSoftware
                 if (currObj != null)
                 {
                     ContainerPaint.Shapes.Add(currObj as Shape);
-                    MessageBox.Show(ContainerPaint.Shapes.Count().ToString());
+                    /*MessageBox.Show(ContainerPaint.Shapes.Count().ToString());*/
                 }
                 currObj = null;
             }
